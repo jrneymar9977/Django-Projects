@@ -1,0 +1,89 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Grid</title>
+  <link rel="stylesheet" href="{% static 'stylep.css' %}">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+
+</head>
+
+<body>
+
+  <!-- <div id="preloader" ></div> -->
+  <div class="hero">
+    <nav>
+      <img class="logo" src="{% static 'images/Quick_BID.png' %}" alt="logo">
+      <section class="search-container">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search">
+        <div class="search-icon-container">
+          <i class="fas fa-search search-icon" id="searchButton"></i>
+        </div>
+      </section>
+      <ul>
+        <li><a href="#">My Auctions</a></li>
+        <li id="login-text" style="display: none;"><a href="../loginpage/index.html">Login/SignUp</a></li>
+        <li><a href="../homepage/homepage.html">Home</a></li>
+        <li><a href="../sellingpage/sellerpage.html">Sell</a></li>
+      </ul>
+      <img src="{% static 'images/user_icon.png' %}" class="user-pic" onclick="toggleMenu()">
+      {% if user.is_authenticated %}
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div id="signout-btn" class="user-info">
+            <h3><a href="{% url 'myapps:logout' %}">logout</a></h3>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div id="signout-btn" class="user-info">
+            <h3><a href="{% url 'myapps:login' %}">login</a></h3>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </nav>
+  </div>
+  <br>
+  <h2>Product Listings</h2>
+  <div class="container">
+    <div class="box-container">
+      <div class="product-card">  {% for product in products %}
+        <h2 class="product-heading">{{ product.productname }}</h2>
+        <p class="product-desc">{{ product.productdescription }}</p>
+        <p class="product-price">Price: ${{ product.productprice }}</p>
+        <img class="product-image" src="{{ product.productimg.url }}">
+        {% endfor %}</div>
+      
+    </div>
+  </div>
+
+  <!-- <script type="module" src="productsview.js"></script> -->
+  <script>
+    let subMenu = document.getElementById("subMenu");
+
+    function toggleMenu() {
+      subMenu.classList.toggle("open-menu");
+    }
+
+  </script>
+  <!-- <script>
+    
+      var loader = document.getElementById("preloader");
+         
+      window.addEventListener("load", async function(){
+          await setTimeout(() => {  loader.style.display = "none"; }, 3000);
+          
+      })
+      
+      </script> -->
+</body>
+
+</html>

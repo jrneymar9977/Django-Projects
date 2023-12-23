@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <script type="module" src="{% static 'script.js' %}"></script>
+
+</head>
+
+<body>
+  {% block content %}
+  <div class="hero">
+    <nav>
+      <img class="logo" src="{% static 'images/Quick_BID.png' %}" alt="logo">
+      <section class="search-container">
+        <input type="text" class="search-bar" id="searchInput" placeholder="Search">
+        <div class="search-icon-container">
+          <i class="fas fa-search search-icon" id="searchButton"></i>
+        </div>
+      </section>
+      <ul>
+        <li><a href="../productpage/productspage.html">My Auctions</a></li>
+        <!-- <li id="login-text" style="display: none;"><a href="../loginpage/index.html">Login/SignUp</a></li>  -->
+        <li><a href="{% url 'myapp:about' %}">About</a></li>
+        <li><a href="{% url 'myapp:sell' %}">Sell</a></li>
+      </ul>
+      <img src="{% static 'images/user_icon.png' %}" class="user-pic" onclick="toggleMenu()">
+
+      {% if user.is_authenticated %}
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div id="signout-btn" class="user-info">
+            <h3><a href="{% url 'myapps:logout' %}">logout</a></h3>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div id="signout-btn" class="user-info">
+            <h3><a href="{% url 'myapps:login' %}">login</a></h3>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </nav>
+  </div>
+  <br>
+  <h2 class="head">On Going Auctions</h2>
+
+  <div class="wrapper">
+    <i id="left" class="fa-solid fa-angle-left"></i>
+    <ul class="carousel">
+      {% for prd in produpd %}
+      <li class="card">
+        <div class="img"><img src="{{prd.productimg.url}}" alt="img" draggable="false"></div>
+        <h3> {{prd.productname}} </h3>
+        <span>{{prd.productprice}}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    <i id="right" class="fa-solid fa-angle-right"></i>
+  </div>
+
+  <div class="container">
+    <br>
+    <h2 class="heading">Categories</h2>
+    <br>
+    <div class="box-container">
+      <a href="{% url 'product_list' category='Electronics' %}" class="box-container">
+        <div class="box">
+          <img src="{% static 'images/electronics_icon.png' %}">
+          <h3>Electronics</h3>
+        </div>
+      </a>
+      <a href="{% url 'product_list' category='Art and Antiques' %}" class="box-container">
+        <div class="box">
+          <img src="{% static 'images/art.png' %}">
+          <h3>Art and Antiques</h3>
+        </div>
+      </a>
+      <a href="{% url 'product_list' category='Sports and Fitness' %}" class="box-container">
+      <div class="box">
+        <img src="{% static 'images/sport.png' %}">
+        <h3>Sports and Fitness</h3>
+      </div>
+      </a>
+      <a href="{% url 'product_list' category='Home and Kitchen' %}" class="box-container">
+      <div class="box" onclick="redirectToCategory('Home and Kitchen')">
+        <img src="{% static 'images/kitchen.png' %}">
+        <h3>Home and Kitchen</h3>
+      </div>
+      </a>
+      <a href="{% url 'product_list' category='Toys and Games' %}" class="box-container">
+      <div class="box">
+        <img src="{% static 'images/toys.png' %}" alt="">
+        <h3>Toys and Games</h3>
+      </div>
+      </a>
+      <a href="{% url 'product_list' category='Fashion and Accessories' %}" class="box-container">
+      <div class="box" onclick="redirectToCategory('Fashion and Accessories')">
+        <img src="{% static 'images/fashion.png' %}" alt="">
+        <h3>Fashion and Accessories</h3>
+      </div>
+      </a>
+      <a href="{% url 'product_list' category='Automotive' %}" class="box-container">
+      <div class="box" onclick="redirectToCategory('Automotive')">
+        <img src="{% static 'images/automotive.png' %}" alt="">
+        <h3>Automotive</h3>
+      </div>
+      </a>
+      <a href="{% url 'product_list' category='Books' %}" class="box-container">
+      <div class="box" onclick="redirectToCategory('Books')">
+        <img src="{% static 'images/books.png' %}" alt="">
+        <h3>Books</h3>
+      </div>
+      </a>
+    </div>
+  </div>
+  <!-- <script>
+    // JavaScript function to redirect to category.html with the selected category
+    function redirectToCategory(category) {
+      // Redirect to category.html with the selected category as a query parameter
+      window.location.href = `category.html?category=${category}`;
+    }
+  </script> -->
+  <script>
+    let subMenu = document.getElementById("subMenu");
+
+    function toggleMenu() {
+      subMenu.classList.toggle("open-menu");
+    }
+  </script>
+  {% endblock %}
+</body>
+
+</html>
