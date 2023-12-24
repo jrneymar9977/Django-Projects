@@ -1,0 +1,32 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.productname }} Details</title>
+    <link rel="stylesheet" href="{% static 'prd_updates.css' %}">
+</head>
+
+<body>
+    <div>
+        <nav>
+            <h1>Ongoing Auctions</h1>
+        </nav>
+    </div>
+
+    <ul>
+        <li>
+            <h2>{{ product.productname }}</h2>
+            <p>Price: {{ product.productprice }}</p>
+            <p>Product description {{product.productdescription}}</p>
+            <p>Bid Ends on {{product.end_time}}</p>
+            <img class="prd-img" src="{{ product.productimg.url }}" alt="{{ product.productname }}">
+        </li>
+    </ul>
+
+</body>
+
+</html>

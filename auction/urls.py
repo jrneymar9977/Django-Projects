@@ -24,6 +24,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('sellers/',include('sellers.urls')),
     path('category',include('category.urls')),
+    path('myauction',include('myauction.urls')),
+    path('myauction',include('search.urls')),
     path('admin/', admin.site.urls),
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'myauction.css' %}">
+    <title>My Auctions</title>
+</head>
+
+<body>
+    <div>
+        <nav>
+            <h1>My Auctions</h1>
+        </nav>
+    </div>
+
+    {% if user_sells %}
+        <ul>
+            {% for sell_item in user_sells %}
+                <li>
+                    <strong>{{ sell_item.productname }}</strong>
+                    <p>Description: {{ sell_item.productdescription }}</p>
+                    <p>Price: {{ sell_item.productprice }}</p>
+                    <img class="product-image" src="{{ sell_item.productimg.url }}">
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No items in your auctions yet.</p>
+    {% endif %}
+</body>
+
+</html>

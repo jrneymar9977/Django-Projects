@@ -10,11 +10,11 @@ body {
     
     font-family: Arial, sans-serif; 
     margin: 0; 
-    
+    max-width: 100%;    
 }
 
 nav{
-  background: rgb(152, 60, 237);;
+  background: rgb(152, 60, 237);
   width: 100%;
   padding: 10px 20px;
   display: inline-flex;
@@ -102,7 +102,7 @@ nav ul li a{
 
 .search-icon {
   position: absolute;
-  top: 50%; 
+  top: 35%; 
   right: 10px; 
   transform: translateY(-50%);
   color: #555; 
@@ -122,7 +122,7 @@ nav ul li a{
 }
 
 .container{
-    background-color: #949494;
+    background-color: #ffffff;
     justify-content: space-between;
     display: block;
     margin: 30px 0px;
@@ -139,24 +139,18 @@ nav ul li a{
 }
 
 .product-card {
-  width: 100%;
+  max-width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
   border-radius: 10px;
   background: #fff;
   display: block;
   text-align: center;
-  /* width: 400px;
-  height: 300px; */
-  margin: 20px 20px;
-  /* overflow: hidden; */
-  padding: 20px 20px;
-  width: 700px;
   justify-content: space-between;
 }
 
 .product-image {
-  max-width: 100%;
-  width: 90px;
+  
+  width: 100px;
   height: 100px;
   align-items: center;
   margin-left: 2px;

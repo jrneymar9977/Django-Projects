@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{% static 'search_results.css' %}">
+</head>
+<body>
+    <div>
+        <nav>
+            <h1>Search Results for "{{ query }}"</h1>
+        </nav>
+    </div>
+    
+    {% if results %}
+        <ul>
+            {% for result in results %}
+                <li>
+                    <h2>{{ result.productname }}</h2>
+                <img class="prd-img" src="{{ result.productimg.url }}" alt="{{ result.productname }}">
+                <p>Price: ${{ result.productprice }}</p>
+                <p>{{ result.productdescription }}</p>
+                <p>Posted on Date {{ result.date }}</p>
+
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

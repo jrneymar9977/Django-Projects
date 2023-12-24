@@ -19,17 +19,18 @@
   <div class="hero">
     <nav>
       <img class="logo" src="{% static 'images/Quick_BID.png' %}" alt="logo">
-      <section class="search-container">
-        <input type="text" class="search-bar" id="searchInput" placeholder="Search">
-        <div class="search-icon-container">
-          <i class="fas fa-search search-icon" id="searchButton"></i>
-        </div>
-      </section>
+      <form action="{% url 'search_results' %}" method="get">
+        <section class="search-container">
+            <input type="text" class="search-bar" id="searchInput" name="search" placeholder="Search">
+            <div class="search-icon-container">
+                <button type="submit" id="searchButton"><i class="fas fa-search search-icon"></i></button>
+            </div>
+        </section>
+    </form>
       <ul>
-        <li><a href="#">My Auctions</a></li>
-        <li id="login-text" style="display: none;"><a href="../loginpage/index.html">Login/SignUp</a></li>
-        <li><a href="../homepage/homepage.html">Home</a></li>
+        <li><a href="{% url 'myauction' %}?next={% url 'myapps:login' %}">My Auctions</a></li>
         <li><a href="../sellingpage/sellerpage.html">Sell</a></li>
+        <li><a href="{% url 'myapp:about' %}">About</a></li>
       </ul>
       <img src="{% static 'images/user_icon.png' %}" class="user-pic" onclick="toggleMenu()">
       {% if user.is_authenticated %}
@@ -58,10 +59,10 @@
       <div class="product-card">  {% for product in products %}
         <h2 class="product-heading">{{ product.productname }}</h2>
         <p class="product-desc">{{ product.productdescription }}</p>
-        <p class="product-price">Price: ${{ product.productprice }}</p>
+        <p class="product-price">Posted on Date {{ product.date }}</p>
+        <p class="product-price">Bid Starts on {{ product.start_time}}</p>
         <img class="product-image" src="{{ product.productimg.url }}">
         {% endfor %}</div>
-      
     </div>
   </div>
 

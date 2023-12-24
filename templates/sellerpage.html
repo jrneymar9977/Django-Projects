@@ -3,122 +3,118 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sell Items</title>
-    <link rel="stylesheet" href="{% static 'sellingpage.css' %}">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Items</title>
+  <link rel="stylesheet" href="{% static 'sellingpage.css' %}">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 
 <body>
   {% block content %}
-    <div class="hero">
-        <nav>
-          <img class="logo" src="{% static 'images/Quick_BID.png' %}" alt="logo">
-          <section class="search-container">
-            <input type="text" class="search-bar" id="searchInput" placeholder="Search">
-            <div class="search-icon-container">
-              <i class="fas fa-search search-icon" id="searchButton"></i>
-            </div>
-          </section>
-          <ul>
-            <!-- <li><a href="../productpage/productspage.html">My Auctions</a></li>
-            <li><a href="../homepage/homepage.html">Home</a></li>
-            <li id="login-text" style="display: none;"><a href="../loginpage/index.html">Login/SignUp</a></li>
-            <li><a href="../homepage/about.html">About</a></li>
-            <li><a href="../sellingpage/sellerpage.html">Sell</a></li> -->
-          </ul>
-          <img src="{% static 'images/user_icon.png' %}" class="user-pic" onclick="toggleMenu()">
-    
-          <div class="sub-menu-wrap" id="subMenu">
-            <div class="sub-menu">
-              <div id="signout-btn" class="user-info">
-                <h3>Signout</h3>
-              </div>
-            </div>
+  <div class="hero">
+    <nav>
+      <img class="logo" src="{% static 'images/Quick_BID.png' %}" alt="logo">
+      <ul>
+        <li><a href="{% url 'myauction' %}?next={% url 'myapps:login' %}">My Auctions</a></li>
+        <li><a href="{% url 'myapp:about' %}">About</a></li>
+        </li><li><a href="{% url 'myapp:home' %}">Home</a></li>
+
+      </ul>
+      <img src="{% static 'images/user_icon.png' %}" class="user-pic" onclick="toggleMenu()">
+      {% if user.is_authenticated %}
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div id="signout-btn" class="user-info">
+            <h3><a href="{% url 'myapps:logout' %}">logout</a></h3>
           </div>
-    
-        </nav>
-      </div>
-    <br>
-
-
-    <div class="Wrapper">
-        <div class="form-box">
-            <h1>Sell Items</h1>
-            <form action="{% url 'sell_item' %}" method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-                <div class="input-box">
-                    <span class="icon"><ion-icon name=""></ion-icon></span>
-                    <select id="category" required class="select_cat" name="category">
-                        <option value="" disabled selected>Select a category</option>
-                        <option value="Electronics">Electronics</option>
-                        <option value="Art and Antiques">Art and Antiques</option>
-                        <option value="Automotive">Automotive</option>
-                        <option value="Toys and Games">Toys and Games</option>
-                        <option value="Sports and Fitness">Sports and Fitness</option>
-                        <option value="Home and Kitchen">Home and Kitchen</option>
-                        <option value="Fashion and Accessories">Fashion and Accessories</option>
-                        <option value="Books">Books</option>
-                    </select>
-                </div>
-                
-                <div class="input-box">
-                    <span class="icon"><ion-icon name=""></ion-icon></span>
-                    <input type="text" name="productname" required id="" placeholder="Product Name">
-
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name=""></ion-icon></span>
-                    <input type="text" name="productdescription" required id="" placeholder="Description">
-
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name=""></ion-icon></span>
-                    <input type="file" required id="" name="productimg" accept=".jpg, .jpeg, .png" placeholder="Add an image">
-                </div>
-
-                <h4>Bid Base Price</h4>
-                <div class="input-box">
-                    <input type="text" id="" name="productprice"
-                         required placeholder="Enter Price">
-                </div>
-                <h4>Date</h4>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="date"></ion-icon></span>
-                    <input type="date" name="date" id="" placeholder="Auction Duration">
-                </div>
-                <h4>Start Time</h4>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="time"></ion-icon></span>
-                    <input type="time" name="start_time" id="" placeholder="Auction Duration">
-                </div>
-                <h4>End Time</h4>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="time"></ion-icon></span>
-                    <input type="time" name="end_time" id="" placeholder="Auction Duration">
-                </div>
-                <h4>Address</h4>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="location"></ion-icon></span>
-                    <input type="text" name="address" id="" placeholder="Address">
-                </div>
-                <div class="input-box">
-                <button type="submit" class="btn" id="">Submit</button>
-                </div>
-            </form>
         </div>
+      </div>
+      {% else %}
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <div id="signout-btn" class="user-info">
+            <h3><a href="{% url 'myapps:login' %}">login</a></h3>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </nav>
+  </div>
+  <br>
+  <div class="Wrapper">
+    <div class="form-box">
+      <h1>Sell Items</h1>
+      <form action="{% url 'sell_item' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-box">
+          <span class="icon"><ion-icon name=""></ion-icon></span>
+          <select id="category" required class="select_cat" name="category">
+            <option value="" disabled selected>Select a category</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Art and Antiques">Art and Antiques</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Toys and Games">Toys and Games</option>
+            <option value="Sports and Fitness">Sports and Fitness</option>
+            <option value="Home and Kitchen">Home and Kitchen</option>
+            <option value="Fashion and Accessories">Fashion and Accessories</option>
+            <option value="Books">Books</option>
+          </select>
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name=""></ion-icon></span>
+          <input type="text" name="productname" required id="" placeholder="Product Name">
+
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name=""></ion-icon></span>
+          <input type="text" name="productdescription" required id="" placeholder="Description">
+
+        </div>
+        <div class="input-box">
+          <span class="icon"><ion-icon name=""></ion-icon></span>
+          <input type="file" required id="" name="productimg" accept=".jpg, .jpeg, .png" placeholder="Add an image">
+        </div>
+
+        <h4>Bid Base Price $</h4>
+        <div class="input-box">
+          <input type="text" id="" name="productprice" required placeholder="Enter Price in $">
+        </div>
+        <h4>Date</h4>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="date"></ion-icon></span>
+          <input type="date" name="date" id="" placeholder="Auction Duration">
+        </div>
+        <h4>Start Time</h4>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="time"></ion-icon></span>
+          <input type="time" name="start_time" id="" placeholder="Auction Duration">
+        </div>
+        <h4>End Time</h4>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="time"></ion-icon></span>
+          <input type="time" name="end_time" id="" placeholder="Auction Duration">
+        </div>
+        <h4>Address</h4>
+        <div class="input-box">
+          <span class="icon"><ion-icon name="location"></ion-icon></span>
+          <input type="text" name="address" id="" placeholder="Address">
+        </div>
+        <div class="input-box">
+          <button type="submit" class="btn" id="">Submit</button>
+        </div>
+      </form>
     </div>
-<script type="module" src="script.js"></script>
-<script>
+  </div>
+  <!-- <script type="module" src="script.js"></script> -->
+  <script>
     let subMenu = document.getElementById("subMenu");
     function toggleMenu() {
       subMenu.classList.toggle("open-menu");
     }
-</script>
-{% endblock %}
+  </script>
+  {% endblock %}
 </body>
 </html>
-

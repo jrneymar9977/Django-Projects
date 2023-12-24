@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'accounts',
     'sellers',
     'category',
+    'myauction',
+    'search',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

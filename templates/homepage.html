@@ -18,14 +18,16 @@
   <div class="hero">
     <nav>
       <img class="logo" src="{% static 'images/Quick_BID.png' %}" alt="logo">
-      <section class="search-container">
-        <input type="text" class="search-bar" id="searchInput" placeholder="Search">
-        <div class="search-icon-container">
-          <i class="fas fa-search search-icon" id="searchButton"></i>
-        </div>
-      </section>
+      <form action="{% url 'search_results' %}" method="get">
+        <section class="search-container">
+            <input type="text" class="search-bar" id="searchInput" name="search" placeholder="Search">
+            <div class="search-icon-container">
+                <button type="submit" id="searchButton"><i class="fas fa-search search-icon"></i></button>
+            </div>
+        </section>
+    </form>
       <ul>
-        <li><a href="../productpage/productspage.html">My Auctions</a></li>
+        <li><a href="{% url 'myauction' %}?next={% url 'myapps:login' %}">My Auctions</a></li>
         <!-- <li id="login-text" style="display: none;"><a href="../loginpage/index.html">Login/SignUp</a></li>  -->
         <li><a href="{% url 'myapp:about' %}">About</a></li>
         <li><a href="{% url 'myapp:sell' %}">Sell</a></li>
@@ -59,7 +61,11 @@
     <ul class="carousel">
       {% for prd in produpd %}
       <li class="card">
-        <div class="img"><img src="{{prd.productimg.url}}" alt="img" draggable="false"></div>
+        <a href="{% url 'myapp:productdetails' prd.id %}">
+          <div class="img">
+            <img src="{{prd.productimg.url}}" alt="img" draggable="false">
+          </div>
+        </a>
         <h3> {{prd.productname}} </h3>
         <span>{{prd.productprice}}</span>
       </li>
@@ -86,50 +92,43 @@
         </div>
       </a>
       <a href="{% url 'product_list' category='Sports and Fitness' %}" class="box-container">
-      <div class="box">
-        <img src="{% static 'images/sport.png' %}">
-        <h3>Sports and Fitness</h3>
-      </div>
+        <div class="box">
+          <img src="{% static 'images/sport.png' %}">
+          <h3>Sports and Fitness</h3>
+        </div>
       </a>
       <a href="{% url 'product_list' category='Home and Kitchen' %}" class="box-container">
-      <div class="box" onclick="redirectToCategory('Home and Kitchen')">
-        <img src="{% static 'images/kitchen.png' %}">
-        <h3>Home and Kitchen</h3>
-      </div>
+        <div class="box" onclick="redirectToCategory('Home and Kitchen')">
+          <img src="{% static 'images/kitchen.png' %}">
+          <h3>Home and Kitchen</h3>
+        </div>
       </a>
       <a href="{% url 'product_list' category='Toys and Games' %}" class="box-container">
-      <div class="box">
-        <img src="{% static 'images/toys.png' %}" alt="">
-        <h3>Toys and Games</h3>
-      </div>
+        <div class="box">
+          <img src="{% static 'images/toys.png' %}" alt="">
+          <h3>Toys and Games</h3>
+        </div>
       </a>
       <a href="{% url 'product_list' category='Fashion and Accessories' %}" class="box-container">
-      <div class="box" onclick="redirectToCategory('Fashion and Accessories')">
-        <img src="{% static 'images/fashion.png' %}" alt="">
-        <h3>Fashion and Accessories</h3>
-      </div>
+        <div class="box" onclick="redirectToCategory('Fashion and Accessories')">
+          <img src="{% static 'images/fashion.png' %}" alt="">
+          <h3>Fashion and Accessories</h3>
+        </div>
       </a>
       <a href="{% url 'product_list' category='Automotive' %}" class="box-container">
-      <div class="box" onclick="redirectToCategory('Automotive')">
-        <img src="{% static 'images/automotive.png' %}" alt="">
-        <h3>Automotive</h3>
-      </div>
+        <div class="box" onclick="redirectToCategory('Automotive')">
+          <img src="{% static 'images/automotive.png' %}" alt="">
+          <h3>Automotive</h3>
+        </div>
       </a>
       <a href="{% url 'product_list' category='Books' %}" class="box-container">
-      <div class="box" onclick="redirectToCategory('Books')">
-        <img src="{% static 'images/books.png' %}" alt="">
-        <h3>Books</h3>
-      </div>
+        <div class="box" onclick="redirectToCategory('Books')">
+          <img src="{% static 'images/books.png' %}" alt="">
+          <h3>Books</h3>
+        </div>
       </a>
     </div>
   </div>
-  <!-- <script>
-    // JavaScript function to redirect to category.html with the selected category
-    function redirectToCategory(category) {
-      // Redirect to category.html with the selected category as a query parameter
-      window.location.href = `category.html?category=${category}`;
-    }
-  </script> -->
   <script>
     let subMenu = document.getElementById("subMenu");
 

@@ -71,7 +71,7 @@ nav ul li a{
 .sub-menu{
   /* background: #fff; */
   padding: 0px;
-  margin: 10px;
+  margin: 2px 19px;
 }
 .user-info{
   display: flex;
@@ -105,7 +105,7 @@ nav ul li a{
 
 .search-icon {
   position: absolute;
-  top: 50%; 
+  top: 35%; 
   right: 10px; 
   transform: translateY(-50%);
   color: #555; 

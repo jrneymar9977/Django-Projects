@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from django.contrib.auth.decorators import login_required
+from sellers.models import sell
 
 def register(request):
     if request.method =='POST':
@@ -42,3 +44,8 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+@login_required(login_url='myapps:login') 
+def myauction(request):
+    user_sells = sell.objects.filter(user=request.user)
+    return render(request, 'myauction.html', {'user_sells': user_sells})
